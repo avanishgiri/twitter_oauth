@@ -29,13 +29,11 @@ get '/auth' do
 end
 
 post '/tweet/post' do 
-  @user = User.find(session[:user_id])
-  @client = Twitter::Client.new(
-    :oauth_token => @user.oauth_token,
-    :oauth_token_secret => @user.oauth_secret
-    )
-  @client.update(params[:tweet])
 
+  @user = User.find(session[:user_id])
+  @user.tweet(params[:tweet])
+
+  redirect '/'
 end
 
 

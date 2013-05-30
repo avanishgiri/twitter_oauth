@@ -1,5 +1,13 @@
-Add your ActiveRecord models here.
+class TweetWorker
+  include Sidekiq::Worker
 
-You can create them by being in the application root directory and running, e.g.,
+  def perform(tweet_id)
+    tweet = Tweet.find(tweet_id)
+    user  = tweet.user
 
-rake generate:model NAME=User
+    # set up Twitter OAuth client here
+    # actually make API call
+    # Note: this does not have access to controller/view helpers
+    # You'll have to re-initialize everything inside here
+  end
+end
